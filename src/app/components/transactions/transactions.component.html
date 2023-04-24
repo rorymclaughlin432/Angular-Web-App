@@ -1,0 +1,131 @@
+<h2>Transactions</h2>
+<p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <!-- <button pButton pRipple label="New Transactions" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button> -->
+        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedTransactions()" [disabled]="!selectedTransactions || !selectedTransactions.length"></button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+        <button pButton pRipple label="Save Transaction(s)" icon="pi pi-upload" class="p-button-help" (click)="onSaveFile()"></button>
+    </ng-template>
+</p-toolbar> 
+
+<p-table #dt [value]="transactions" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+    [(selection)]="selectedTransactions" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h5 class="m-0">Manage Transactions</h5>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id">Transaction ID <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="customerid">Customer ID <p-sortIcon field="customerid"></p-sortIcon></th>
+            <th pSortableColumn="externalcustomerid">External Customer ID <p-sortIcon field="externalcustomerid"></p-sortIcon></th>
+            <th pSortableColumn="transactiondate">Transaction Date <p-sortIcon field="transactiondate"></p-sortIcon></th>
+            <th pSortableColumn="matchdate">Match Date <p-sortIcon field="matchdate"></p-sortIcon></th>
+            <th pSortableColumn="merchantid">Merchant ID <p-sortIcon field="merchantid"></p-sortIcon></th>
+            <th pSortableColumn="merchantcategorycode">Merchant Category Code <p-sortIcon field="merchantcategorycode"></p-sortIcon></th>
+            <th pSortableColumn="narrative">Narrative <p-sortIcon field="narrative"></p-sortIcon></th>
+            <th pSortableColumn="partnerid">Partner ID <p-sortIcon field="partnerid"></p-sortIcon></th>
+            <th pSortableColumn="offerid">Offer ID <p-sortIcon field="offerid"></p-sortIcon></th>
+            <th pSortableColumn="currencycode">Currency Code <p-sortIcon field="currencycode"></p-sortIcon></th>
+            <th pSortableColumn="reversalindicator">Reversal Indicator <p-sortIcon field="reversalindicator"></p-sortIcon></th>
+            <th pSortableColumn="amount">Amount <p-sortIcon field="amount"></p-sortIcon></th>
+            <th pSortableColumn="paymentamount">Payment Amount <p-sortIcon field="paymentamount"></p-sortIcon></th>
+            <th pSortableColumn="marketingrate">Marketing Rate <p-sortIcon field="marketingrate"></p-sortIcon></th>
+            <th pSortableColumn="billingrate">Billing Rate <p-sortIcon field="billingrate"></p-sortIcon></th>
+            <th pSortableColumn="billingamount">Billing Amount <p-sortIcon field="billingamount"></p-sortIcon></th>
+            <th pSortableColumn="vatamount">VAT Amount <p-sortIcon field="vatamount"></p-sortIcon></th>
+            <th pSortableColumn="grossamount">Gross Amount <p-sortIcon field="grossamount"></p-sortIcon></th>
+            <th pSortableColumn="netamount">Net Amount <p-sortIcon field="netamount"></p-sortIcon></th>
+            <th pSortableColumn="vatrate">VAT Rate <p-sortIcon field="vatrate"></p-sortIcon></th>
+            <th pSortableColumn="conversionfactor">Conversion Factor <p-sortIcon field="conversionfactor"></p-sortIcon></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-transaction>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="transaction"></p-tableCheckbox>
+            </td>
+            <td>{{transaction.id}}</td>
+            <td>{{transaction.customerid}}</td>
+            <td>{{transaction.externalcustomerid}}</td>
+            <td>{{transaction.transactiondate}}</td>
+            <td>{{transaction.matchdate}}</td>
+            <td>{{transaction.merchantid}}</td>
+            <td>{{transaction.merchantcategorycode}}</td>
+            <td>{{transaction.narrative}}</td>
+            <td>{{transaction.partnerid}}</td>
+            <td>{{transaction.offerid}}</td>
+            <td>{{transaction.currencycode}}</td>
+            <td>{{transaction.reversalindicator}}</td>
+            <td>{{transaction.amount}}</td>
+            <td>{{transaction.paymentamount}}</td>
+            <td>{{transaction.marketingrate}}</td>
+            <td>{{transaction.billingrate}}</td>
+            <td>{{transaction.billingamount}}</td>
+            <td>{{transaction.vatamount}}</td>
+            <td>{{transaction.grossamount}}</td>
+            <td>{{transaction.netamount}}</td>
+            <td>{{transaction.vatrate}}</td>
+            <td>{{transaction.conversionfactor}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+           Total Transactions: {{transactions ? transactions.length : 0 }}
+        </div>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="transactionDialog" [style]="{width: '450px'}" header="Transaction Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="id" [(ngModel)]="transaction.id" required autofocus />
+            <small class="p-error" *ngIf="submitted && !transaction.id">Transaction ID is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="publisherId">Publisher</label>
+            <input type="text" pInputText id="publisherId" [(ngModel)]="transaction.publisherId" required autofocus />
+        </div>
+        <div class="p-field">
+            <label for="registrationMarker">Registration or Deregistration</label>
+            <p-dropdown [(ngModel)]="transaction.registrationMarker" inputId="registrationMarker" [options]="registerStatus" placeholder="Select">
+                <ng-template let-option pTemplate="item">
+                    <span [class]="'transaction-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+            </p-dropdown>
+        </div>
+        <div class="p-field">
+            <label for="gender">Gender</label>
+            <p-dropdown [(ngModel)]="transaction.gender" inputId="gender" [options]="genderStatus" placeholder="Select">
+                <ng-template let-option pTemplate="item">
+                    <span [class]="'transaction-badge status-' + option.value">{{option.label}}</span>
+                </ng-template>
+            </p-dropdown>
+        </div>
+        <div class="p-field">
+            <label for="birthYear">Year of Birth</label>
+            <input type="text" pInputText id="birthYear" [(ngModel)]="transaction.birthYear" required autofocus />
+            <small class="p-error" *ngIf="submitted && !transaction.birthYear">Year is required.</small>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveTransaction()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

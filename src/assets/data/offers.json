@@ -1,0 +1,56 @@
+{
+  "data": [
+    {
+      "id": "testid",
+      "offerdetail": {
+        "id": "testid",
+        "offername": "Blah blah blah",
+        "offertypeid": 1,
+        "offerstatusid": 1,
+        "offerchannelid": 1,
+        "segmentcategoryid": 1,
+        "ironofferid": null,
+        "partnerid": "testpartnerid",
+        "publisherid": "testpublisherid",
+        "currencyid": 1,
+        "startdate": "2021-12-08T00:00:00.000Z",
+        "enddate": "2022-03-08T23:59:59.000Z",
+        "publisheddate": "2021-12-08T13:07:59.211Z",
+        "createdAt": "2021-12-08T13:07:59.713Z",
+        "frequency": 0,
+        "offerdetails": [
+          {
+            "id": "testid",
+            "offerid": "testofferid",
+            "marketingrate": 10,
+            "minimumspendamount": 0,
+            "maximumspendamount": 0,
+            "billingrate": 15,
+            "cap": 0,
+            "override": 0,
+            "isbounty": false
+          }
+        ],
+        "collateral": {
+          "offerwebassetcollateralid": "testofferwebassetcollateralid",
+          "prioritisationScore": 23,
+          "bannertitle": "  Blah blah blah",
+          "offerheader": "testofferheader",
+          "marketingratedisplaytext": "  10",
+          "longcopy": "<p>test long copy</p>",
+		  "shortcopy": "<p>test long copy</p>",
+          "websiteurllink": "test.com",
+          "websiteurldisplaytext": "Blah blah blah",
+          "logo": "",
+          "logothumbnail": "",
+          "carouselbackground": "",
+          "carousellogo": "",
+          "offerlogo": "https://rms-02.png",
+          "offercardimage": "https://rms-74.png",
+          "offerdetailimage": "https://rms-8e.png",
+          "offerdesktopasset": "https://rms-2b.png"
+        }
+      }
+    }
+  ]
+}

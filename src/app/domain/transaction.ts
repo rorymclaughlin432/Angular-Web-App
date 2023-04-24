@@ -1,0 +1,25 @@
+export interface Transaction {
+    id?:string;
+    code?:string;
+    customerid?:string;
+    externalcustomerid?:string;
+    transactiondate?:Date;
+    matchdate?:Date;
+    merchantid?:string;
+    merchantcategorycode?:string;
+    narrative?:string;
+    partnerid?:string;
+    offerid?:string;
+    currencycode?:string;
+    reversalindicator?:string;
+    amount?:number;
+    paymentamount?:number;
+    marketingrate?:number;
+    billingrate?:number;
+    billingamount?:number;
+    vatamount?:number;
+    grossamount?:number;
+    netamount?:number;
+    vatrate?:number;
+    conversionfactor?:number;
+}
